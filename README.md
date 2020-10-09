@@ -1,4 +1,10 @@
 # WRIO
-Which Restaurant Is Open
+Which Restaurant Is Open . Today
 <hr>
-<p>A PWA that shows which restaurant is currently open.</p>
+<p>An open source PWA that shows which restaurants on property are open today.</p>
+
+Grey: Open today<br>
+Green: Open now<br>
+Red: Closing soon<br>
+
+Add to Home Screen for a full app experience directly from the web.
