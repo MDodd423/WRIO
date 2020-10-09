@@ -1,0 +1,22 @@
+{
+  "short_name": "WRIO",
+  "name": "Which Restaurant Is Open",
+  "description": "A webapp for which restaurant is open",
+  "icons": [
+    {
+      "src": "wrio192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "wrio512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#666",
+  "display": "standalone",
+  "scope": ".",
+  "theme_color": "#666"
+}

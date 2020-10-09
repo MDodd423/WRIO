@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A WRIO Webapp">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#666" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel='stylesheet' href='wrio.css' type='text/css'>
+  <link rel="manifest" href="manifest.json">
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:300' rel='stylesheet' type='text/css'>
+    <!--Begin iPhone PWA Stuff-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="With Manifest">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="touch-icon-iphone-retina.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="touch-icon-ipad-retina.png">
+  <!-- iPhone 5/iPhone SE (640x1136) -->
+  <link href="splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+  <!-- iPhone 6/7/8 (750/1334) -->
+  <link href="splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+  <!-- iPhone 6/7/8 Plus (1242x2208) -->
+  <link href="splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+  <!-- iPhone X/Xs (1125x2436) -->
+  <link href="splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+  <!-- iPhone Xr (828x1792) -->
+  <link href="splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+  <!-- iPhone Xs Max (1242x2688) -->
+  <link href="splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+  <!-- iPad Mini/iPad Air (1536x2048) -->
+  <link href="splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+  <!-- iPad Pro 10.5" (1668x2224) -->
+  <link href="splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+  <!-- iPad Pro 11" (1668x2388) -->
+  <link href="splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+  <!-- iPad Pro 12.9" (2048x2732) -->
+  <link href="splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+  <!--End iPhone PWA Stuff-->
+  <title>WRIO</title>
+ </head>
+ <h1>Which Restaurant Is Open</h1>   
+ <hr><h2>
+  <p><script> document.write(new Date().toDateString()); </script></p>
+  <p><script> document.write(new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })); </script></p>
+ </h2><hr>
+ <body>
+  <center>
+  <h2 id="pickle">Pickle & Jam</h2>
+  <h2 id="buffet15">Buffet Americana: $15</h2>
+  <h2 id="buffet23">Buffet Americana: $23</h2>
+  <h2 id="buffet26">Buffet Americana: $26</h2>
+  <h2 id="betmgm">BetMGM</h2>
+  <h2 id="chicago">Chicago Steakhouse</h2>
+  <h2 id="roastbean">Roasted Bean</h2>
+  <script src="wrioswscript.js" defer></script>
+  <script>
+  document.getElementById("pickle").style.display = "none";
+  document.getElementById("buffet15").style.display = "none";
+  document.getElementById("buffet23").style.display = "none";
+  document.getElementById("buffet26").style.display = "none";
+  document.getElementById("betmgm").style.display = "none";
+  document.getElementById("chicago").style.display = "none";
+  document.getElementById("roastbean").style.display = "none";
+  var date = new Date();
+  var day = date.getDay();
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  
+   if (day == "1") {
+	if (hour >= "8" && hour <= "16"){
+	  document.getElementById("betmgm").style.display = "inherit";
+	}else if (hour >= "17" && ((hour <= "20") || (hour == "21" && minute <= "30"))){
+	  document.getElementById("betmgm").style.cssText = "display: inherit; color: green";
+	}else if (hour == "21" && minute > "30"){
+	  document.getElementById("betmgm").style.cssText = "display: inherit; color: red";
+	}
+	document.getElementById("pickle").style.cssText = "display: inherit; color: green";
+   }else if(day == "2"){
+    if (hour >= "8" && hour <= "16"){
+	  document.getElementById("betmgm").style.display = "inherit";
+	}else if (hour >= "17" && ((hour <= "20") || (hour == "21" && minute <= "30"))){
+	  document.getElementById("betmgm").style.cssText = "display: inherit; color: green";
+	}else if (hour == "21" && minute > "30"){
+	  document.getElementById("betmgm").style.cssText = "display: inherit; color: red";
+	}
+	document.getElementById("pickle").style.cssText = "display: inherit; color: green";	
+   }else if(day == "3"){
+    if (hour >= "8" && ((hour == "17" && minute < "30") || (hour <= "16"))){
+	  document.getElementById("chicago").style.display = "inherit";
+	}else if (((hour <= "20") || (hour == "21" && minute <= "30")) && ((hour == "17" && minute >= "30") || (hour >= "18"))){
+	  document.getElementById("chicago").style.cssText = "display: inherit; color: green";
+	}else if (hour == "21" && minute > "30"){
+	  document.getElementById("chicago").style.cssText = "display: inherit; color: red";
+	}
+	document.getElementById("pickle").style.cssText = "display: inherit; color: green";
+   }else if(day == "4"){
+    if (hour >= "8" && hour <= "16"){
+	  document.getElementById("buffet23").style.display = "inherit";
+	}else if (hour >= "17" && ((hour <= "19") || (hour == "20" && minute <= "30"))){
+	  document.getElementById("buffet23").style.cssText = "display: inherit; color: green";
+	}else if (hour == "20" && minute > "30"){
+	  document.getElementById("buffet23").style.cssText = "display: inherit; color: red";
+	}
+	if (hour >= "8" && ((hour == "17" && minute < "30") || (hour <= "16"))){
+	  document.getElementById("chicago").style.display = "inherit";
+	}else if (((hour <= "20") || (hour == "21" && minute <= "30")) && ((hour == "17" && minute >= "30") || (hour >= "18"))){
+	  document.getElementById("chicago").style.cssText = "display: inherit; color: green";
+	}else if (hour == "21" && minute > "30"){
+	  document.getElementById("chicago").style.cssText = "display: inherit; color: red";
+	}
+	document.getElementById("pickle").style.cssText = "display: inherit; color: green";
+   }else if(day == "5"){
+   	if (hour >= "8" && hour <= "16"){
+	  document.getElementById("buffet26").style.display = "inherit";
+	}else if (hour >= "17" && ((hour <= "20") || (hour == "22" && minute <= "30"))){
+	  document.getElementById("buffet26").style.cssText = "display: inherit; color: green";
+	}else if (hour == "22" && minute > "30"){
+	  document.getElementById("buffet26").style.cssText = "display: inherit; color: red";
+	}
+	if (hour >= "8" && ((hour == "16" && minute < "30") || (hour <= "15"))){
+	  document.getElementById("chicago").style.display = "inherit";
+	}else if (((hour <= "21") || (hour == "22" && minute <= "30")) && ((hour == "16" && minute >= "30") || (hour >= "17"))){
+	  document.getElementById("chicago").style.cssText = "display: inherit; color: green";
+	}else if (hour == "22" && minute > "30"){
+	  document.getElementById("chicago").style.cssText = "display: inherit; color: red";
+	}
+	document.getElementById("pickle").style.cssText = "display: inherit; color: green";	
+   }else if(day == "6"){
+   	if (hour >= "4" && hour <= "6"){
+	  document.getElementById("roastbean").style.display = "inherit";
+	}else if (hour >= "7" && ((hour <= "9") || (hour == "10" && minute <= "30"))){
+	  document.getElementById("roastbean").style.cssText = "display: inherit; color: green";
+	}else if (hour == "10" && minute > "30"){
+	  document.getElementById("roastbean").style.cssText = "display: inherit; color: red";
+	}
+	if (hour >= "6" && hour <= "10"){
+	  document.getElementById("betmgm").style.display = "inherit";
+	}else if (hour >= "11" && ((hour <= "20") || (hour == "21" && minute <= "30"))){
+	  document.getElementById("betmgm").style.cssText = "display: inherit; color: green";
+	}else if (hour == "21" && minute > "30"){
+	  document.getElementById("betmgm").style.cssText = "display: inherit; color: red";
+	}
+	if (hour >= "6" && hour <= "8"){
+	  document.getElementById("buffet15").style.display = "inherit";
+	}else if (hour >= "9" && ((hour <= "13") || (hour == "14" && minute <= "30"))){
+	  document.getElementById("buffet15").style.cssText = "display: inherit; color: green";
+	}else if (hour == "14" && minute > "30"){
+	  document.getElementById("buffet15").style.cssText = "display: inherit; color: red";
+	}else if (hour >= "15" && ((hour <= "21") || (hour == "22" && minute <= "30"))){
+	  document.getElementById("buffet26").style.cssText = "display: inherit; color: green";
+	}else if (hour == "22" && minute > "30"){
+	  document.getElementById("buffet26").style.cssText = "display: inherit; color: red";
+	}
+	if (hour >= "8" && ((hour == "16" && minute < "30") || (hour <= "15"))){
+	  document.getElementById("chicago").style.display = "inherit";
+	}else if (((hour <= "21") || (hour == "22" && minute <= "30")) && ((hour == "16" && minute >= "30") || (hour >= "17"))){
+	  document.getElementById("chicago").style.cssText = "display: inherit; color: green";
+	}else if (hour == "22" && minute > "30"){
+	  document.getElementById("chicago").style.cssText = "display: inherit; color: red";
+	}
+	if ((hour >= "0" && hour < "7") || (hour >= "23")){
+	  document.getElementById("pickle").style.cssText = "display: inherit; color: green";	
+	}else if (hour == "7"){
+	  document.getElementById("pickle").style.cssText = "display: inherit; color: red";	
+	}else if (hour == "21" || hours == "22"){
+	  document.getElementById("pickle").style.display = "inherit";
+	}
+   }else if(day == "7"){
+   	if (hour >= "4" && hour <= "6"){
+	  document.getElementById("roastbean").style.display = "inherit";
+	}else if (hour >= "7" && ((hour <= "9") || (hour == "10" && minute <= "30"))){
+	  document.getElementById("roastbean").style.cssText = "display: inherit; color: green";
+	}else if (hour == "10" && minute > "30"){
+	  document.getElementById("roastbean").style.cssText = "display: inherit; color: red";
+	}
+	if (hour >= "6" && hour <= "10"){
+	  document.getElementById("betmgm").style.display = "inherit";
+	}else if (hour >= "11" && ((hour <= "20") || (hour == "21" && minute <= "30"))){
+	  document.getElementById("betmgm").style.cssText = "display: inherit; color: green";
+	}else if (hour == "21" && minute > "30"){
+	  document.getElementById("betmgm").style.cssText = "display: inherit; color: red";
+	}
+	if (hour >= "6" && hour <= "8"){
+	  document.getElementById("buffet15").style.display = "inherit";
+	}else if (hour >= "9" && ((hour <= "13") || (hour == "14" && minute <= "30"))){
+	  document.getElementById("buffet15").style.cssText = "display: inherit; color: green";
+	}else if (hour == "14" && minute > "30"){
+	  document.getElementById("buffet15").style.cssText = "display: inherit; color: red";
+	}else if (hour >= "15" && ((hour <= "19") || (hour == "20" && minute <= "30"))){
+	  document.getElementById("buffet23").style.cssText = "display: inherit; color: green";
+	}else if (hour == "20" && minute > "30"){
+	  document.getElementById("buffet23").style.cssText = "display: inherit; color: red";
+	}
+	if (hour >= "8" && ((hour == "17" && minute < "30") || (hour <= "16"))){
+	  document.getElementById("chicago").style.display = "inherit";
+	}else if (((hour <= "20") || (hour == "21" && minute <= "30")) && ((hour == "17" && minute >= "30") || (hour >= "18"))){
+	  document.getElementById("chicago").style.cssText = "display: inherit; color: green";
+	}else if (hour == "21" && minute > "30"){
+	  document.getElementById("chicago").style.cssText = "display: inherit; color: red";
+	}
+	if ((hour >= "0" && hour < "7") || (hour >= "23")){
+	  document.getElementById("pickle").style.cssText = "display: inherit; color: green";	
+	}else if (hour == "7"){
+	  document.getElementById("pickle").style.cssText = "display: inherit; color: red";	
+	}else if (hour == "21" || hours == "22"){
+	  document.getElementById("pickle").style.display = "inherit";
+	}
+   }   
+  </script>
+ </body>
+</html>
